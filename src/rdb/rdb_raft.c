@@ -2937,6 +2937,7 @@ rdb_raft_start(struct rdb *db)
 	raft_set_nodeid(db->d_raft, dss_self_rank());
 	if (db->d_new)
 		raft_set_first_start(db->d_raft);
+	
 	raft_set_callbacks(db->d_raft, &rdb_raft_cbs, db);
 
 	rc = rdb_raft_load(db);
@@ -2955,15 +2956,16 @@ rdb_raft_start(struct rdb *db)
 	rc = dss_ult_create(rdb_recvd, db, DSS_XS_SELF, 0, 0, &db->d_recvd);
 	if (rc != 0)
 		goto err_raft_state;
+	
 	rc = dss_ult_create(rdb_timerd, db, DSS_XS_SELF, 0, 0, &db->d_timerd);
 	if (rc != 0)
 		goto err_recvd;
-	rc = dss_ult_create(rdb_callbackd, db, DSS_XS_SELF, 0, 0,
-			    &db->d_callbackd);
+	
+	rc = dss_ult_create(rdb_callbackd, db, DSS_XS_SELF, 0, 0, &db->d_callbackd);
 	if (rc != 0)
 		goto err_timerd;
-	rc = dss_ult_create(rdb_compactd, db, DSS_XS_SELF, 0, 0,
-			    &db->d_compactd);
+	
+	rc = dss_ult_create(rdb_compactd, db, DSS_XS_SELF, 0, 0, &db->d_compactd);
 	if (rc != 0)
 		goto err_callbackd;
 

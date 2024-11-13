@@ -173,8 +173,8 @@ struct dtx_handle {
 	d_list_t			 dth_share_act_list;
 	/* DTX list to be checked */
 	d_list_t			 dth_share_tbd_list;
-	int                               dth_share_tbd_count;
-	uint32_t                          padding5;
+	int                  dth_share_tbd_count;
+	uint32_t             padding5;
 };
 
 /* Each sub transaction handle to manage each sub thandle */

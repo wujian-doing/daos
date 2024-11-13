@@ -336,6 +336,8 @@ lrua_peek_(struct lru_array *array, const uint32_t *idx, void **entryp)
  */
 #define lrua_allocx(array, idx, key, entryp, stub)	\
 	lrua_allocx_(array, idx, key, (void **)(entryp), (void **)(stub))
+
+
 static inline int
 lrua_allocx_(struct lru_array *array, uint32_t *idx, uint64_t key,
 	     void **entryp, void **stub)
